@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'models/concerns/purchasable_spec'
 
-RSpec.describe Movie, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Movie, type: :model do
+  it_behaves_like 'purchasable'
 end
