@@ -7,7 +7,6 @@ class CreatePurchaseOptions < ActiveRecord::Migration[6.0]
       t.string :quality
 
       t.references :purchasable, type: :uuid, index: true, polymorphic: true
-      t.references :purchase, type: :uuid, index: true
 
       t.timestamps
     end

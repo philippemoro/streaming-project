@@ -2,5 +2,7 @@
 
 class Purchase < ApplicationRecord
   belongs_to :user
-  has_one :purchase_option
+  belongs_to :purchase_option
+
+  delegate :purchasable, to: :purchase_option, allow_nil: false
 end

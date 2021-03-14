@@ -2,5 +2,7 @@
 
 FactoryBot.define do
   factory :purchase do
+    purchase_option
+    user
   end
 end

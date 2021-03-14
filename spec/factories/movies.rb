@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :movie do
-    title { 'MyString' }
-    plot { 'MyString' }
+    title { Faker::Movie.title }
+    plot { Faker::Lorem.paragraph }
   end
 end

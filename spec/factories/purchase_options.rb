@@ -2,7 +2,8 @@
 
 FactoryBot.define do
   factory :purchase_option do
-    price { '9.99' }
-    quality { 'MyString' }
+    purchasable { create(:movie) }
+    price { [9.99, 15.99, 29.99].sample }
+    quality { %w[SD HD].sample }
   end
 end
