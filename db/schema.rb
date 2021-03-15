@@ -10,11 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_14_141410) do
+ActiveRecord::Schema.define(version: 2021_03_14_234556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "contents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "purchasable_type"
+    t.uuid "purchasable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["purchasable_type", "purchasable_id"], name: "index_contents_on_purchasable_type_and_purchasable_id"
+  end
 
   create_table "episodes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "title"
@@ -36,11 +44,10 @@ ActiveRecord::Schema.define(version: 2021_03_14_141410) do
   create_table "purchase_options", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.decimal "price"
     t.string "quality"
-    t.string "purchasable_type"
-    t.uuid "purchasable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["purchasable_type", "purchasable_id"], name: "index_purchase_options_on_purchasable_type_and_purchasable_id"
+    t.uuid "content_id"
+    t.index ["content_id"], name: "index_purchase_options_on_content_id"
   end
 
   create_table "purchases", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

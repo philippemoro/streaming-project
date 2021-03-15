@@ -4,6 +4,6 @@ module Purchasable
   extend ActiveSupport::Concern
 
   included do
-    has_many :purchase_options, as: :purchasable
+    has_one :content, as: :purchasable
   end
 end

@@ -3,5 +3,5 @@
 require 'rails_helper'
 
 describe PurchaseOption, type: :model do
-  it { should belong_to(:purchasable) }
+  it { should belong_to(:content) }
 end
