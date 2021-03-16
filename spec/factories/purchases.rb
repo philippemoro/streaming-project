@@ -5,6 +5,7 @@
 # Table name: purchases
 #
 #  id                 :uuid             not null, primary key
+#  expires_at         :datetime
 #  price              :decimal(, )
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
@@ -25,5 +26,14 @@ FactoryBot.define do
     purchase_option
     user
     price { purchase_option.price }
+    expires_at { 2.days.from_now }
+
+    trait :expired do
+      created_at { 5.days.ago }
+      updated_at { 5.days.ago }
+      expires_at { 3.days.ago }
+    end
+
+    factory :expired_purchase, traits: [:expired]
   end
 end

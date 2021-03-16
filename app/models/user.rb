@@ -11,6 +11,7 @@
 #
 class User < ApplicationRecord
   has_many :purchases
+  has_many :alive_purchases, -> { alive }, class_name: 'Purchase'
 
   validates :email, presence: true, format: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
 end
