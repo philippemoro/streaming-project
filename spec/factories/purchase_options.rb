@@ -19,6 +19,6 @@ FactoryBot.define do
   factory :purchase_option do
     content
     price { [9.99, 15.99, 29.99].sample }
-    quality { %w[SD HD].sample }
+    quality { %w[sd hd].sample }
   end
 end

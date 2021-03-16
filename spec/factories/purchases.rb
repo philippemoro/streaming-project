@@ -5,6 +5,7 @@
 # Table name: purchases
 #
 #  id                 :uuid             not null, primary key
+#  price              :decimal(, )
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  purchase_option_id :uuid
@@ -23,5 +24,6 @@ FactoryBot.define do
   factory :purchase do
     purchase_option
     user
+    price { purchase_option.price }
   end
 end
