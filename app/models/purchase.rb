@@ -41,12 +41,10 @@ class Purchase < ApplicationRecord
   end
 
   def content_already_purchased
-    content = purchase_option.content
-
     return unless user && user.alive_purchases.includes(purchase_option: :content)
-                              .where(purchase_options: { content: content })
+                              .where(purchase_options: { content: purchase_option&.content })
                               .references(:purchase_options, :contents).exists?
 
-    errors.add(:content, 'Content already purchased')
+    errors.add(:content, 'already purchased')
   end
 end

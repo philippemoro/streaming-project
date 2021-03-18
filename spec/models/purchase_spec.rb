@@ -24,15 +24,23 @@
 require 'rails_helper'
 
 describe Purchase, type: :model do
-  it { is_expected.to belong_to(:purchase_option) }
-  it { is_expected.to belong_to(:user) }
-  it { should validate_numericality_of(:price).is_greater_than_or_equal_to(0.0) }
+  include ActiveSupport::Testing::TimeHelpers
+  context 'validations' do
+    subject { build(:purchase, purchase_option: create(:purchase_option)) }
+
+    it { should belong_to(:user) }
+    it { should belong_to(:purchase_option) }
+    it { should validate_numericality_of(:price).is_greater_than_or_equal_to(0.0) }
+  end
 
   describe 'callbacks' do
-    subject(:purchase) { create(:purchase, created_at: '01/01/2021'.to_date) }
+    before { travel_to Time.zone.local(2020, 12, 12) }
+    after { travel_back }
+
+    subject(:purchase) { create(:purchase) }
 
     describe '#set_expire_date' do
-      it { expect(purchase.expires_at).to eq('03/01/2021'.to_date) }
+      it { expect(purchase.expires_at).to be_within(10.second).of(Time.zone.local(2020, 12, 14)) }
     end
   end
 
