@@ -28,6 +28,7 @@ class Purchase < ApplicationRecord
   delegate :purchasable, to: :purchase_option, allow_nil: false
 
   validates :price, numericality: { greater_than_or_equal_to: 0.0 }
+  validate :content_already_purchased, on: :create
 
   after_create :set_expire_date
 
@@ -36,6 +37,16 @@ class Purchase < ApplicationRecord
   def set_expire_date
     return if expires_at
 
-    self.expires_at = created_at + 2.days
+    update_column(:expires_at, created_at + 2.days)
+  end
+
+  def content_already_purchased
+    content = purchase_option.content
+
+    return unless user && user.alive_purchases.includes(purchase_option: :content)
+                              .where(purchase_options: { content: content })
+                              .references(:purchase_options, :contents).exists?
+
+    errors.add(:content, 'Content already purchased')
   end
 end
