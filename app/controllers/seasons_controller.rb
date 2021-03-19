@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class SeasonsController < ApplicationController
-  before_action :fetch_seasons, only: [:index]
-
   def index
     json_response(SeasonSerializer.new(fetch_seasons).serializable_hash.to_json, [:episodes])
   end

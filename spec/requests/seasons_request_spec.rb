@@ -21,8 +21,8 @@ describe 'Seasons', type: :request do
     end
 
     it 'returns the episodes of each season' do
-      expect(json_response.first.dig('relationships','episodes','data')).not_to be_empty
-      expect(json_response.first.dig('relationships','episodes','data').size).to eq(3)
+      expect(json_response.first.dig('relationships', 'episodes', 'data')).not_to be_empty
+      expect(json_response.first.dig('relationships', 'episodes', 'data').size).to eq(3)
     end
 
     context 'with pagination' do

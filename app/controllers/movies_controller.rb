@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class MoviesController < ApplicationController
-  before_action :fetch_movies, only: [:index]
-
   def index
     json_response(MovieSerializer.new(fetch_movies).serializable_hash.to_json)
   end

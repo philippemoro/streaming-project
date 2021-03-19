@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ContentsController < ApplicationController
-  before_action :fetch_contents, only: [:index]
-
   def index
     json_response(ContentSerializer.new(fetch_contents).serializable_hash, :purchasable)
   end
