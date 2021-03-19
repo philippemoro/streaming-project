@@ -22,7 +22,7 @@
 #  fk_rails_...  (purchase_option_id => purchase_options.id)
 #
 class Purchase < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, touch: true
   belongs_to :purchase_option
 
   delegate :purchasable, to: :purchase_option, allow_nil: false
