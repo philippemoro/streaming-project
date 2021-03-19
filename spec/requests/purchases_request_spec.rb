@@ -11,7 +11,6 @@ describe 'Purchases', type: :request do
     let(:params) { { user_id: user.id } }
 
     context 'with valid params' do
-
       before { post "/contents/#{content.id}/purchase_options/#{purchase_option.id}/purchases", params: params }
 
       let(:hash_match) do
