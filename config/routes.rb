@@ -8,4 +8,7 @@ Rails.application.routes.draw do
       resources :purchases, only: [:create]
     end
   end
+  resources :users, only: [:library] do
+    get 'library', on: :member
+  end
 end
