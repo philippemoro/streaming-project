@@ -1,0 +1,72 @@
+version: "3.8"
+
+services:
+  app:
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    entrypoint: ["./entrypoints/docker-entrypoint.sh"]
+    command: ["./entrypoints/docker-app-init.sh"]
+    ports:
+      - target: 3000
+        published: 3000
+        protocol: tcp
+        mode: host
+    volumes:
+      - type: volume
+        source: bundle-cache
+        target: /usr/local/bundle
+      - type: bind
+        source: .
+        target: /usr/local/src/app
+        consistency: delegated
+    networks:
+      - backend
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - type: volume
+        source: postgres-data
+        target: /var/lib/postgresql/data
+        consistency: delegated
+    ports:
+      - target: 5432
+        published: 5432
+        protocol: tcp
+        mode: host
+    networks:
+      - backend
+    logging:
+      driver: none
+
+
+  redis:
+      image: redis:alpine
+      networks:
+      - backend
+      logging:
+        driver: none
+      volumes:
+      - type: volume
+        source: redis-data
+        target: /var/lib/redis/data
+
+
+volumes:
+  postgres-data:
+  bundle-cache:
+  redis-data:
+
+
+networks:
+  backend:

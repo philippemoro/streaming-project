@@ -4,15 +4,15 @@ class ContentsController < ApplicationController
   before_action :fetch_contents, only: [:index]
 
   def index
-    json_response(ContentSerializer.new(@contents).serializable_hash, :purchasable)
+    json_response(ContentSerializer.new(fetch_contents).serializable_hash, :purchasable)
   end
 
   private
 
   def fetch_contents
-    Rails.cache.fetch('/contents', expires_in: 1.minutes) do
-      @contents = Content.all.order(:created_at)
-                         .paginate(page: permitted_params[:page], per_page: permitted_params[:per_page])
+    Rails.cache.fetch("contents-#{permitted_params[:page]}-#{permitted_params[:per_page]}", expires_in: 1.minutes) do
+      Content.all.order(:created_at)
+             .paginate(page: permitted_params[:page], per_page: permitted_params[:per_page])
     end
   end
 
