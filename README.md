@@ -1,24 +1,12 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Require
 
-Things you may want to cover:
+* Ruby version: 2.6.3
+* Rails version: 6.0.3
+* postgresql
 
-* Ruby version
 
-* System dependencies
+### ERB Diagram
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![image](https://user-images.githubusercontent.com/28736591/111749400-7a082180-8870-11eb-8dc0-2db9e0ae7c90.png)
