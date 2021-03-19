@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :fetch_user, :fetch_library, only: [:library]
+  before_action :fetch_user, only: [:library]
   before_action :fetch_library, only: [:library]
 
   def library
