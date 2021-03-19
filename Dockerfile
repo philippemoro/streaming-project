@@ -1,6 +1,11 @@
 FROM ruby:2.6-alpine
 
-ENV BUNDLER_VERSION=2.2.13
+ENV DATABASE_NAME=streaming_project_development
+ENV DATABASE_USER=postgres
+ENV DATABASE_PASSWORD=postgres
+ENV DATABASE_HOST=postgres
+ENV DATABASE_PORT=5432
+ENV RAILS_ENV=development
 
 RUN apk add --no-cache --update \
       build-base \
