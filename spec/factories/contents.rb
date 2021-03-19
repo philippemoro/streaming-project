@@ -5,7 +5,9 @@
 # Table name: contents
 #
 #  id               :uuid             not null, primary key
+#  plot             :string
 #  purchasable_type :string
+#  title            :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  purchasable_id   :uuid
@@ -16,6 +18,8 @@
 #
 FactoryBot.define do
   factory :content do
+    title { Faker::Movie.title }
+    plot { Faker::Lorem.paragraph }
     purchasable { create(:movie) }
 
     trait :movie do

@@ -5,7 +5,9 @@
 # Table name: contents
 #
 #  id               :uuid             not null, primary key
+#  plot             :string
 #  purchasable_type :string
+#  title            :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  purchasable_id   :uuid
@@ -19,4 +21,5 @@ require 'rails_helper'
 describe Content, type: :model do
   it { should belong_to(:purchasable) }
   it { should have_many(:purchase_options) }
+  it { should validate_presence_of(:title) }
 end

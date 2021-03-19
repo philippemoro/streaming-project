@@ -5,7 +5,9 @@
 # Table name: contents
 #
 #  id               :uuid             not null, primary key
+#  plot             :string
 #  purchasable_type :string
+#  title            :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  purchasable_id   :uuid
@@ -18,7 +20,7 @@ class ContentSerializer
   include JSONAPI::Serializer
 
   # attributes
-  attributes :id, :purchasable_type, :created_at, :updated_at, :purchasable_id
+  attributes :id, :title, :plot, :purchasable_type, :created_at, :updated_at, :purchasable_id
 
   # relations
   has_many :purchase_options

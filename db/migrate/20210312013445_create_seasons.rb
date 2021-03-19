@@ -3,8 +3,6 @@
 class CreateSeasons < ActiveRecord::Migration[6.0]
   def change
     create_table :seasons, id: :uuid do |t|
-      t.string :title
-      t.string :plot
       t.integer :number
 
       t.timestamps

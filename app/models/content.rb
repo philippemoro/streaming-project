@@ -5,7 +5,9 @@
 # Table name: contents
 #
 #  id               :uuid             not null, primary key
+#  plot             :string
 #  purchasable_type :string
+#  title            :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  purchasable_id   :uuid
@@ -17,4 +19,6 @@
 class Content < ApplicationRecord
   has_many :purchase_options
   belongs_to :purchasable, polymorphic: true
+
+  validates_presence_of :title
 end
