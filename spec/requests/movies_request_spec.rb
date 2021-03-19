@@ -5,7 +5,7 @@ require 'rails_helper'
 describe 'Movies', type: :request do
   describe 'GET /movies' do
     let!(:movies) { create_list(:movie, 20) }
-    let(:json_response) { JSON.parse(response.body) }
+    let(:json_response) { JSON.parse(response.body)['data'] }
     let(:params) { {} }
 
     before { get '/movies', params: params }

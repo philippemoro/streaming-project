@@ -9,7 +9,7 @@ describe 'Users', type: :request do
     let!(:purchases) { create_list(:purchase, 5, user: user) }
     let!(:other_purchases) { create_list(:purchase, 5, user: user2) }
     let!(:expired_purchases) { create_list(:expired_purchase, 5, user: user) }
-    let(:json_response) { JSON.parse(response.body) }
+    let(:json_response) { JSON.parse(response.body)['data'] }
 
     before { get "/users/#{user.id}/library" }
 

@@ -4,7 +4,7 @@ class ContentsController < ApplicationController
   before_action :fetch_contents, only: [:index]
 
   def index
-    json_response(@contents, :purchasable)
+    json_response(ContentSerializer.new(@contents).serializable_hash, :purchasable)
   end
 
   private

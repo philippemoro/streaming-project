@@ -4,7 +4,7 @@ class SeasonsController < ApplicationController
   before_action :fetch_seasons, only: [:index]
 
   def index
-    json_response(@seasons, [:episodes])
+    json_response(SeasonSerializer.new(@seasons).serializable_hash.to_json, [:episodes])
   end
 
   private

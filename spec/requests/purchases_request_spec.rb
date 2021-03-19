@@ -26,7 +26,7 @@ describe 'Purchases', type: :request do
 
       it 'creates the purchase' do
         expect(response.code).to eq('200')
-        expect(json_response).to match(hash_match)
+        expect(json_response['data']['attributes']).to match(hash_match)
       end
     end
 

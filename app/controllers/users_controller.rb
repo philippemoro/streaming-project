@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :fetch_library, only: [:library]
 
   def library
-    json_response(@library)
+    json_response(PurchaseSerializer.new(@library).serializable_hash.to_json)
   end
 
   private

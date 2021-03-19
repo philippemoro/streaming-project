@@ -5,7 +5,7 @@ require 'rails_helper'
 describe 'Seasons', type: :request do
   describe 'GET /seasons' do
     let!(:seasons) { create_list(:season, 10, :with_episodes) }
-    let(:json_response) { JSON.parse(response.body) }
+    let(:json_response) { JSON.parse(response.body)['data'] }
     let(:params) { {} }
 
     before { get '/seasons', params: params }
@@ -21,8 +21,8 @@ describe 'Seasons', type: :request do
     end
 
     it 'returns the episodes of each season' do
-      expect(json_response.first['episodes']).not_to be_empty
-      expect(json_response.first['episodes'].size).to eq(3)
+      expect(json_response.first.dig('relationships','episodes','data')).not_to be_empty
+      expect(json_response.first.dig('relationships','episodes','data').size).to eq(3)
     end
 
     context 'with pagination' do

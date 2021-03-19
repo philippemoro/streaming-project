@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   before_action :fetch_movies, only: [:index]
 
   def index
-    json_response(@movies)
+    json_response(MovieSerializer.new(@movies).serializable_hash.to_json)
   end
 
   def fetch_movies

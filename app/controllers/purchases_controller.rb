@@ -6,7 +6,7 @@ class PurchasesController < ApplicationController
   def create
     @purchase = Purchase.create!(permitted_params.merge({ price: @purchase_option.price }))
 
-    json_response(@purchase)
+    json_response(PurchaseSerializer.new(@purchase).serializable_hash.to_json)
   end
 
   private
