@@ -8,8 +8,10 @@ class MoviesController < ApplicationController
   end
 
   def fetch_movies
-    @movies = Movie.all.order(:created_at)
-                   .paginate(page: permitted_params[:page], per_page: permitted_params[:per_page])
+    Rails.cache.fetch('/movies', expires_in: 1.minutes) do
+      @movies = Movie.all.order(:created_at)
+                     .paginate(page: permitted_params[:page], per_page: permitted_params[:per_page])
+    end
   end
 
   def permitted_params

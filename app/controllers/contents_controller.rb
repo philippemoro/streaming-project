@@ -10,8 +10,10 @@ class ContentsController < ApplicationController
   private
 
   def fetch_contents
-    @contents = Content.all.order(:created_at)
-                       .paginate(page: permitted_params[:page], per_page: permitted_params[:per_page])
+    Rails.cache.fetch('/contents', expires_in: 1.minutes) do
+      @contents = Content.all.order(:created_at)
+                         .paginate(page: permitted_params[:page], per_page: permitted_params[:per_page])
+    end
   end
 
   def permitted_params
