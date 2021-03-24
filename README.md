@@ -9,8 +9,10 @@
 
 ### Running the API with docker
 1. Make sure you have ports `:3000` and `:5432` available
-2. Run `$docker-compose up -d`
-3. Done, API should be up accepting requests on `localhost:3000`
+2. Make sure your bundle is up to date by running `bundle update`
+3. Run `$docker-compose up -d`
+4. Done, API should be up accepting requests on `localhost:3000`
+
 
 
 ### Running tests with docker
