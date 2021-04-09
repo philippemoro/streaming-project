@@ -43,7 +43,7 @@ describe 'Purchases', type: :request do
         it 'creates the purchase' do
           expect(response.code).to eq('200')
           expect(json_response['data']).to match(hash_match)
-          expect(json_response['data']['attributes']['price']).to eq("0.0")
+          expect(json_response['data']['attributes']['price']).to eq('0.0')
         end
 
         it { expect(coupon.reload).not_to be_active }
