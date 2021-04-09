@@ -29,6 +29,7 @@ describe Purchase, type: :model do
     subject { build(:purchase, purchase_option: create(:purchase_option)) }
 
     it { should belong_to(:user) }
+    it { should have_one(:coupon) }
     it { should belong_to(:purchase_option) }
     it { should validate_numericality_of(:price).is_greater_than_or_equal_to(0.0) }
   end

@@ -14,6 +14,7 @@ require 'rails_helper'
 describe User, type: :model do
   it { is_expected.to have_many(:purchases) }
   it { is_expected.to have_many(:alive_purchases) }
+  it { is_expected.to have_many(:coupons) }
   it { should validate_presence_of(:email) }
 
   it { should allow_value('email@test.com').for(:email) }

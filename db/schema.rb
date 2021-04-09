@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_16_211616) do
+ActiveRecord::Schema.define(version: 2021_04_09_141836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 2021_03_16_211616) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["purchasable_type", "purchasable_id"], name: "index_contents_on_purchasable_type_and_purchasable_id"
+  end
+
+  create_table "coupons", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.uuid "purchase_id"
+    t.string "code"
+    t.datetime "redeemed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["purchase_id"], name: "index_coupons_on_purchase_id"
+    t.index ["user_id"], name: "index_coupons_on_user_id"
   end
 
   create_table "episodes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

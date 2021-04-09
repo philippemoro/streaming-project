@@ -29,4 +29,5 @@ class PurchaseSerializer
   # relations
   belongs_to :user
   belongs_to :purchase_option
+  has_one :coupon
 end

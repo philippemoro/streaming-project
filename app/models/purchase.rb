@@ -25,10 +25,12 @@ class Purchase < ApplicationRecord
   belongs_to :user, touch: true
   belongs_to :purchase_option
 
+  has_one :coupon
+
   delegate :purchasable, to: :purchase_option, allow_nil: false
 
   validates :price, numericality: { greater_than_or_equal_to: 0.0 }
-  validate :content_already_purchased, on: :create
+  validate :content_already_purchased, :invalid_coupon, on: :create
 
   after_create :set_expire_date
 
@@ -46,5 +48,11 @@ class Purchase < ApplicationRecord
                               .references(:purchase_options, :contents).exists?
 
     errors.add(:content, 'already purchased')
+  end
+
+  def invalid_coupon
+    return unless coupon
+
+    errors.add(:coupon, 'already redeemed') unless coupon.active?
   end
 end
