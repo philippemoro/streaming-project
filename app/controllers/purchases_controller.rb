@@ -4,8 +4,10 @@ class PurchasesController < ApplicationController
   before_action :fetch_purchase_option, :fetch_coupon, only: [:create]
 
   def create
-    @purchase = Purchase.create!(purchase_params)
-    set_coupon
+    ActiveRecord::Base.transaction do
+      @purchase = Purchase.create!(purchase_params)
+      set_coupon
+    end
 
     json_response(PurchaseSerializer.new(@purchase).serializable_hash.to_json)
   end
